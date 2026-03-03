@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You ❤️</title>
+    <title>Happy Birthday Khushi ❤️</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div id="intro-overlay">
+        <h1 class="birthday-wish">Happy Birthday <br><span>Khushi</span></h1>
+        <div class="hearts-loader">❤️</div>
+    </div>
+
     <div id="hearts-container"></div>
 
-    <div class="main-container">
+    <div class="main-container" id="main-content" style="display: none;">
         <div class="card">
             <div class="img-box">
                 <img src="Screenshot 2026-03-03 155312.png" id="slider-img" alt="Memory">
@@ -17,15 +23,10 @@
 
             <div class="text-box">
                 <h2 id="title">"Instant Spark"</h2>
-                <p id="desc">Your smile makes my day a whole lot brighter. 😊</p>
-            </div>
-
-            <div class="nav-controls">
-                <button class="nav-btn" id="prev">←</button>
-                <button class="music-btn" id="playBtn">🎵 Play Music</button>
-                <button class="nav-btn" id="next">→</button>
+                <p id="desc">Every time you smile, the world gets brighter. 😊</p>
             </div>
         </div>
+        <button class="music-btn" id="playBtn" style="margin-top: 15px;">🎵 Play Music</button>
     </div>
 
     <audio id="myAudio" loop>
@@ -35,3 +36,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
