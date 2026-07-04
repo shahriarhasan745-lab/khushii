@@ -8,10 +8,24 @@
 </head>
 <body>
 
-    <!-- Background Music (Arctic Monkeys - Do I Wanna Know Cover) -->
+    <!-- Background Music -->
     <audio id="bg-music" loop>
         <source src="https://pub-c5e31b5cdafb419a86629d1c7462ec3b.r2.dev/do-i-wanna-know-lullaby.mp3" type="audio/mpeg">
     </audio>
+
+    <!-- Music Status Indicator -->
+    <div id="music-indicator" class="music-box" onclick="toggleMusic()">
+        <span class="disc">🎵</span>
+    </div>
+
+    <!-- Floating Background Hearts -->
+    <div class="bg-hearts">
+        <div class="heart-particle">❤️</div>
+        <div class="heart-particle">💖</div>
+        <div class="heart-particle">🌸</div>
+        <div class="heart-particle">✨</div>
+        <div class="heart-particle">❤️</div>
+    </div>
 
     <!-- 1. Lock Screen -->
     <div id="lock-screen" class="screen active" onclick="playMusicOnce()">
@@ -23,7 +37,7 @@
             </div>
             <div class="right-panel">
                 <h3>Enter a passcode</h3>
-                <p class="hint">(Hint: Your special day? 🤭)</p>
+                <p class="hint">(Hint: Our special day? 🤭)</p>
                 <div class="dots-container">
                     <span class="dot"></span>
                     <span class="dot"></span>
@@ -61,57 +75,63 @@
     <!-- 3. Gift Menu Screen -->
     <div id="gift-screen" class="screen">
         <div class="gift-container-box">
-            <h2>CLICK ON GIFTS TO OPEN 🎁</h2>
-            <p style="color: #ffb3c1; margin-bottom: 20px;">Explore all the secrets one by one...</p>
+            <h2>CHOOSE A BOX TO UNLOCK MY HEART 🎁</h2>
+            <p style="color: #ffb3c1; margin-bottom: 20px;">Take your time to unlock all 3 secrets carefully...</p>
             <div class="gifts-grid">
-                <div class="gift-box" onclick="openGift('camera')">📷 <p>Gift 1</p></div>
-                <div class="gift-box" onclick="openGift('cake')">🎂 <p>Gift 2</p></div>
-                <div class="gift-box" onclick="openGift('gallery')">💖 <p>Gift 3</p></div>
+                <div class="gift-box" id="box-camera" onclick="openGift('camera')">💌 <p>My Feelings</p></div>
+                <div class="gift-box" id="box-cake" onclick="openGift('cake')">🔒 <p>The Love Vault</p></div>
+                <div class="gift-box" id="box-gallery" onclick="openGift('gallery')">📸 <p>Our Gallery</p></div>
             </div>
         </div>
     </div>
 
-    <!-- 4. Gift 1: Message Layout -->
+    <!-- 4. Gift 1: My Feelings (With Typing Effect) -->
     <div id="gift-camera" class="screen">
         <div class="split-view">
-            <div class="text-side fade-in-left">
-                <h2>Happy Birthday My Love 🌸</h2>
-                <p>I want to be your vacuum cleaner, breathing in your dust. I want to be your Ford Cortina, I will never rust.</p>
-                <p>You bring a soft kind of magic to every single day, and I hope today wraps you in calm moments, warm laughs, and the sweetest kind of peace.</p>
+            <div class="text-side">
+                <h2>To The Absolute Prettiest... 🌸</h2>
+                <div id="typing-container" class="typewriter-text"></div>
             </div>
             <div class="visual-side fade-in-right">
                 <div class="camera-mockup-frame">
                     <img src="IMG_20260704_181521.jpg.jpeg" alt="Camera View">
-                    <div class="frame-caption">Happy Birthday 🎉</div>
+                    <div class="frame-caption">Just You & Me ✨</div>
                 </div>
             </div>
         </div>
-        <button class="btn back-btn" onclick="backToGifts()">Back to Gifts</button>
+        <button class="btn back-btn" onclick="backToGifts()">Back to Choices</button>
     </div>
 
-    <!-- 5. Gift 2: Cake Wish Layout -->
+    <!-- 5. Gift 2: The Love Vault -->
     <div id="gift-cake" class="screen">
         <div class="split-view reverse">
             <div class="visual-side fade-in-left">
-                <div class="cake-display">
-                    <div class="cake-emoji">🍓🎂🍓</div>
-                    <h3>MAKE A WISH</h3>
-                    <p class="sub">✨ blow your candle ✨</p>
-                    <p class="click-hint" onclick="blowCandle()">[ click on cake ]</p>
+                <div class="vault-card" onclick="flipVaultCard(this)">
+                    <div class="vault-front">
+                        <div class="lock-icon">❤️</div>
+                        <h3>CLICK TO UNLOCK</h3>
+                        <p>[ read the secret note inside ]</p>
+                    </div>
+                    <div class="vault-back">
+                        <p class="flirt-line">"Your smile makes every space feel brighter, and your laugh is my favorite melody."</p>
+                        <p>Every time my phone lights up, I secretly hope it's a text from you. You make my chaotic days feel completely warm and peaceful. 🥰</p>
+                    </div>
                 </div>
             </div>
             <div class="text-side fade-in-right">
-                <p class="flirt-line">"Your smile makes every space feel brighter, and your laugh feels like a warm day."</p>
-                <p class="main-wish">I pray that all your dreams come true and that you are always happy. I just want to see you smile forever and ever! 💖</p>
+                <h2>A Little Secret 🤫</h2>
+                <p>Sometimes I catch myself smiling at my screen just thinking about the conversations we have. You have this unexplainable hold on my thoughts, and honestly? I don't ever want it to change.</p>
+                <p style="color: #ffb3c1; font-size: 1rem;">(Click on the red card to flip and read the note!)</p>
             </div>
         </div>
-        <button class="btn back-btn" onclick="backToGifts()">Back to Gifts</button>
+        <button class="btn back-btn" onclick="backToGifts()">Back to Choices</button>
     </div>
 
     <!-- 6. Gift 3: Polaroid Memory Gallery Slider -->
     <div id="gift-gallery" class="screen">
         <div class="gallery-window">
             <h2 class="gallery-title">Moments I Cherish With You 💖</h2>
+            <p id="gallery-counter" style="color: #ffb3c1; margin-bottom: 10px;">View all photos to unlock the surprise: (1/7)</p>
             
             <div class="slider-container">
                 <div class="slide active">
@@ -171,11 +191,11 @@
     <div id="final-screen" class="screen">
         <div class="split-view">
             <div class="text-side proposal-text fade-in-left">
-                <h1>To the love of my life... ❤️</h1>
+                <h1>From the bottom of my heart... ❤️</h1>
                 <div class="letter-scroll">
-                    <p>To the man who has stolen my heart (and never returned it 🤭).</p>
-                    <p>If you like your coffee hot, let me be your coffee pot. You call the shots, babe. I just wanna be yours.</p>
-                    <p>No amount of time or words is ever enough with you. You feel like home. You make my world feel softer, safer, and completely beautiful.</p>
+                    <p>To the one who has stolen my heart (and never returned it 🤭).</p>
+                    <p class="lyrics-style">"If you like your coffee hot, let me be your coffee pot.<br>You call the shots, babe. I just wanna be yours."</p>
+                    <p>No amount of time or words is ever enough when I'm with you. You make my world feel softer, safer, and completely beautiful. I love everything about us.</p>
                     <h3 class="final-ask">I really, really like you. Will you be mine? 🥰</h3>
                 </div>
                 <div class="action-buttons">
