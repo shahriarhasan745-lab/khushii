@@ -8,14 +8,17 @@
 </head>
 <body>
 
+    <!-- Background Music (O Piya - Chill/Lofi Version) -->
     <audio id="bg-music" loop preload="auto" crossorigin="anonymous">
-        <source src="https://archive.org/download/20170331GoldenBrown/GoldenBrown%5B20170331%5D.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- Music Status Indicator -->
     <div id="music-indicator" class="music-box" onclick="toggleMusic()">
         <span class="disc">🎵</span>
     </div>
 
+    <!-- Floating Background Hearts -->
     <div class="bg-hearts">
         <div class="heart-particle">❤️</div>
         <div class="heart-particle">💖</div>
@@ -24,6 +27,7 @@
         <div class="heart-particle">❤️</div>
     </div>
 
+    <!-- 1. Lock Screen (Pic 1) -->
     <div id="lock-screen" class="screen active" onclick="playMusicOnce()">
         <div class="lock-container">
             <div class="left-panel">
@@ -58,6 +62,7 @@
         </div>
     </div>
 
+    <!-- 2. Wrong Passcode Screen -->
     <div id="wrong-screen" class="screen">
         <div class="wrong-container">
             <h1>WRONG PASSCODE</h1>
@@ -67,9 +72,10 @@
         </div>
     </div>
 
+    <!-- 3. Gift Menu Screen -->
     <div id="gift-screen" class="screen">
         <div class="gift-container-box">
-            <h2>CHOOSE A BOX TO UNLOCK MY HEART 🎁</h2>
+            <h2>CLICK ON GIFTS TO OPEN 🎁</h2>
             <p style="color: #ffb3c1; margin-bottom: 20px;">Take your time to unlock all 3 secrets carefully...</p>
             <div class="gifts-grid">
                 <div class="gift-box" id="box-camera" onclick="openGift('camera')">💌 <p>My Feelings</p></div>
@@ -79,10 +85,11 @@
         </div>
     </div>
 
+    <!-- 4. Gift 1: My Feelings (With Typing Effect & Pic 2) -->
     <div id="gift-camera" class="screen">
         <div class="split-view">
             <div class="text-side">
-                <h2>To The Absolute Prettiest... 🌸</h2>
+                <h2>To the love of my life... 🌸</h2>
                 <div id="typing-container" class="typewriter-text"></div>
             </div>
             <div class="visual-side fade-in-right">
@@ -95,6 +102,7 @@
         <button class="btn back-btn" onclick="backToGifts()">Back to Choices</button>
     </div>
 
+    <!-- 5. Gift 2: The Love Vault (Click on card to flip & view note) -->
     <div id="gift-cake" class="screen">
         <div class="split-view reverse">
             <div class="visual-side fade-in-left">
@@ -105,65 +113,60 @@
                         <p>[ read the secret note inside ]</p>
                     </div>
                     <div class="vault-back">
-                        <p class="flirt-line">"Your smile makes every space feel brighter, and your laugh is my favorite melody."</p>
-                        <p>Every time my phone lights up, I secretly hope it's a text from you. You make my chaotic days feel completely warm and peaceful. 🥰</p>
+                        <p class="flirt-line">"Your smile makes every space feel brighter, and your laugh feels like a warm day."</p>
+                        <p>I pray that all your dreams come true and that you are always happy... truly want to see you smile everyday. 🥰</p>
                     </div>
                 </div>
             </div>
             <div class="text-side fade-in-right">
                 <h2>A Little Secret 🤫</h2>
-                <p>Sometimes I catch myself smiling at my screen just thinking about the conversations we have. You have this unexplainable hold on my thoughts, and honestly? I don't ever want it to change.</p>
+                <p>May this year be full of little wins, warm conversations and moments that remind just how loved you are.</p>
                 <p style="color: #ffb3c1; font-size: 1rem;">(Click on the red card to flip and read the note!)</p>
             </div>
         </div>
         <button class="btn back-btn" onclick="backToGifts()">Back to Choices</button>
     </div>
 
+    <!-- 6. Gift 3: Polaroid Memory Gallery Slider (Contains the rest of your pics) -->
     <div id="gift-gallery" class="screen">
         <div class="gallery-window">
             <h2 class="gallery-title">Moments I Cherish With You 💖</h2>
-            <p id="gallery-counter" style="color: #ffb3c1; margin-bottom: 10px;">View all photos to unlock the surprise: (1/7)</p>
+            <p id="gallery-counter" style="color: #ffb3c1; margin-bottom: 10px;">View all photos to unlock the surprise: (1/6)</p>
             
             <div class="slider-container">
                 <div class="slide active">
                     <div class="premium-polaroid">
-                        <img src="FB_IMG_17831668821594879.jpg.jpg" alt="Your Beautiful Smile">
+                        <img src="FB_IMG_17831668821594879.jpg.jpeg" alt="Pic 3">
                         <p class="caption">Your Beautiful Smile ✨</p>
                     </div>
                 </div>
                 <div class="slide">
                     <div class="premium-polaroid">
-                        <img src="FB_IMG_17831670241742378.jpg.jpg" alt="Vibing Together">
+                        <img src="FB_IMG_17831670241742378.jpg.jpeg" alt="Pic 4">
                         <p class="caption">Vibing Together 🎵</p>
                     </div>
                 </div>
                 <div class="slide">
                     <div class="premium-polaroid">
-                        <img src="IMG_20260704_181521.jpg.jpeg" alt="Shy Little Moments">
-                        <p class="caption">Shy Little Moments 🥰</p>
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="premium-polaroid">
-                        <img src="IMG_20260704_181614.jpg.jpeg" alt="Classroom Memories">
+                        <img src="IMG_20260704_181614.jpg.jpeg" alt="Pic 5">
                         <p class="caption">Classroom Memories 🌸</p>
                     </div>
                 </div>
                 <div class="slide">
                     <div class="premium-polaroid">
-                        <img src="IMG_20260704_181633.jpg.jpeg" alt="Sharing Secrets">
+                        <img src="IMG_20260704_181633.jpg.jpeg" alt="Pic 6">
                         <p class="caption">Sharing Secrets 🤫</p>
                     </div>
                 </div>
                 <div class="slide">
                     <div class="premium-polaroid">
-                        <img src="IMG_20260704_181703.jpg.jpeg" alt="Studying Together">
+                        <img src="IMG_20260704_181703.jpg.jpeg" alt="Pic 7">
                         <p class="caption">Studying Together 📚</p>
                     </div>
                 </div>
                 <div class="slide">
                     <div class="premium-polaroid">
-                        <img src="IMG_20260704_181722.jpg.jpeg" alt="Focused & Prettiest">
+                        <img src="IMG_20260704_181722.jpg.jpeg" alt="Pic 8">
                         <p class="caption">Focused & Prettiest 👀</p>
                     </div>
                 </div>
@@ -178,15 +181,18 @@
         </div>
     </div>
 
+    <!-- 7. Final Proposal Screen (Pic 1 reused beautifully for the end frame) -->
     <div id="final-screen" class="screen">
         <div class="split-view">
             <div class="text-side proposal-text fade-in-left">
-                <h1>From the bottom of my heart... ❤️</h1>
+                <h1>To the love of my life... ❤️</h1>
                 <div class="letter-scroll">
-                    <p>To the one who has stolen my heart (and never returned it 🤭).</p>
-                    <p class="lyrics-style">"Golden brown, texture like sun<br>Lays me down, with my mind she runs."</p>
-                    <p>No amount of time or words is ever enough when I'm with you. You make my world feel softer, safer, and completely beautiful. I love everything about us.</p>
-                    <h3 class="final-ask">I really, really like you. Will you be mine? 🥰</h3>
+                    <p>To the man who has stolen my heart (and never returned it 🤭).</p>
+                    <p>Tell you how I feel, no amount of time is ever enough with you.</p>
+                    <p>You feel like home 🏡. You make my world feel softer, safer, real. I will always believe that God knew I needed you. Someone safe, someone steady, someone kind. Someone who sees me fully and still chooses me.</p>
+                    <p>The little me always dreamed to have someone like you. You've shown me the kind of love that makes me want to become a better person for you. I hope you know how much I appreciate everything you do for me, every day no matter how tired you are.</p>
+                    <p>And I hope in every smile, every fight, every laugh and every moment together you feel my love and know just how much you mean to me.</p>
+                    <h3 class="final-ask">I WANT TO ANNOY YOU for the rest of your life. 🥰</h3>
                 </div>
                 <div class="action-buttons">
                     <button class="btn yes-btn" onclick="celebrate()">YES! 💖</button>
@@ -196,7 +202,7 @@
             <div class="visual-side fade-in-right">
                 <div class="premium-polaroid final-frame">
                     <img src="IMG_20260704_181355.jpg.jpeg" alt="The One">
-                    <p class="caption">I love you ohhhuu 🐧</p>
+                    <p class="caption">I love you ohhhuu 🐧 (you'll always be my fvrt)</p>
                 </div>
             </div>
         </div>
