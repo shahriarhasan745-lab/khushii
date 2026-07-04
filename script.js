@@ -1,26 +1,28 @@
 let currentPasscode = "";
-const correctPasscode = "2026"; // তোমার ৪ ডিজিটের কোড
+const correctPasscode = "2026"; // Passcode
 let musicStarted = false;
 let currentSlideIdx = 0;
 
-// Tracking items for unlocking final screen
 let viewedGifts = new Set();
-let viewedSlides = new Set([0]); // Starts with the first slide checked
+let viewedSlides = new Set([0]);
 
-// Lines for the cinematic typewriter effect
 const paragraphTexts = [
-    `"I want to be your vacuum cleaner, breathing in your dust.<br>I want to be your Ford Cortina, I will never rust."`,
+    `"Golden brown, texture like sun. Lays me down, with my mind she runs."`,
     `You bring a soft kind of magic to every single day. Out of all the people in the world, my eyes always secretly search for you.`,
     `Spending time with you is my absolute favorite escape.`
 ];
 
+// Robust function to force audio trigger on any click interaction
 function playMusicOnce() {
     if (!musicStarted) {
         const audio = document.getElementById("bg-music");
+        audio.volume = 0.8; // Set volume level
         audio.play().then(() => {
             musicStarted = true;
             document.getElementById("music-indicator").classList.add("playing");
-        }).catch(err => console.log("Audio deferred"));
+        }).catch(err => {
+            console.log("Autoplay blocked by browser. Retrying on keypress...");
+        });
     }
 }
 
@@ -37,7 +39,7 @@ function toggleMusic() {
 }
 
 function pressKey(num) {
-    playMusicOnce();
+    playMusicOnce(); // Attempts to unlock audio contextual block on keypress
     if (currentPasscode.length < 4) {
         currentPasscode += num;
         updateDots();
@@ -75,6 +77,7 @@ function switchScreen(fromId, toId) {
 }
 
 function openGift(type) {
+    playMusicOnce(); // Backup audio trigger
     viewedGifts.add(type);
     switchScreen("gift-screen", `gift-${type}`);
     
@@ -89,13 +92,12 @@ function openGift(type) {
 
 function startTypingEffect() {
     const container = document.getElementById("typing-container");
-    container.innerHTML = ""; // Clear old text
+    container.innerHTML = "";
     
     paragraphTexts.forEach((text, index) => {
         const p = document.createElement("p");
         if(index === 0) p.classList.add("lyrics-style");
         p.innerHTML = text;
-        // Introduce artificial timing delays between lines for longer immersion
         p.style.animationDelay = `${index * 2.5}s`; 
         container.appendChild(p);
     });
@@ -114,8 +116,6 @@ function showSlide(idx) {
     slides[idx].classList.add("active");
     
     viewedSlides.add(idx);
-    
-    // Update visual count indicator
     document.getElementById("gallery-counter").innerText = `View all photos to unlock the surprise: (${viewedSlides.size}/7)`;
     checkFinalUnlock();
 }
@@ -133,7 +133,6 @@ function prevSlide() {
 }
 
 function checkFinalUnlock() {
-    // Requires all 3 main gifts visited AND all 7 unique photos actively scrolled through
     if (viewedGifts.size === 3 && viewedSlides.size === 7) {
         document.getElementById("final-surprise-btn").style.display = "inline-block";
     }
