@@ -1,5 +1,5 @@
 let currentPasscode = "";
-const correctPasscode = "2026"; // Passcode
+const correctPasscode = "2026"; // তোমার ৪ ডিজিটের কোড
 let musicStarted = false;
 let currentSlideIdx = 0;
 
@@ -7,28 +7,33 @@ let viewedGifts = new Set();
 let viewedSlides = new Set([0]);
 
 const paragraphTexts = [
-    `"Golden brown, texture like sun. Lays me down, with my mind she runs."`,
-    `You bring a soft kind of magic to every single day. Out of all the people in the world, my eyes always secretly search for you.`,
-    `Spending time with you is my absolute favorite escape.`
+    "You bring a soft kind of magic to every day, and I hope today wraps you in calm moments, warm laughs, and the sweetest kind of peace.",
+    "May this year be full of little wins, warm conversations and moments that remind just how loved you are.",
+    "I love you ohhhuu 🐧"
 ];
 
-// Robust function to force audio trigger on any click interaction
+// এই ফাংশনটি যেকোনো বাটনে প্রথম ক্লিকেই গান স্টার্ট করবে
 function playMusicOnce() {
     if (!musicStarted) {
         const audio = document.getElementById("bg-music");
-        audio.volume = 0.8; // Set volume level
-        audio.play().then(() => {
-            musicStarted = true;
-            document.getElementById("music-indicator").classList.add("playing");
-        }).catch(err => {
-            console.log("Autoplay blocked by browser. Retrying on keypress...");
-        });
+        if (audio) {
+            audio.volume = 0.8;
+            audio.play().then(() => {
+                musicStarted = true;
+                const indicator = document.getElementById("music-indicator");
+                if (indicator) indicator.classList.add("playing");
+            }).catch(err => {
+                console.log("Autoplay waiting for solid interaction...");
+            });
+        }
     }
 }
 
 function toggleMusic() {
     const audio = document.getElementById("bg-music");
     const indicator = document.getElementById("music-indicator");
+    if (!audio || !indicator) return;
+    
     if (audio.paused) {
         audio.play();
         indicator.classList.add("playing");
@@ -39,7 +44,9 @@ function toggleMusic() {
 }
 
 function pressKey(num) {
-    playMusicOnce(); // Attempts to unlock audio contextual block on keypress
+    // যেকোনো নম্বর টিপলেই গান প্লে করার চেষ্টা করবে
+    playMusicOnce(); 
+    
     if (currentPasscode.length < 4) {
         currentPasscode += num;
         updateDots();
@@ -52,8 +59,11 @@ function pressKey(num) {
 function updateDots() {
     const dots = document.querySelectorAll(".dots-container .dot");
     dots.forEach((dot, idx) => {
-        if (idx < currentPasscode.length) dot.classList.add("filled");
-        else dot.classList.remove("filled");
+        if (idx < currentPasscode.length) {
+            dot.classList.add("filled");
+        } else {
+            dot.classList.remove("filled");
+        }
     });
 }
 
@@ -72,12 +82,16 @@ function tryAgain() {
 }
 
 function switchScreen(fromId, toId) {
-    document.getElementById(fromId).classList.remove("active");
-    document.getElementById(toId).classList.add("active");
+    const fromScreen = document.getElementById(fromId);
+    const toScreen = document.getElementById(toId);
+    if (fromScreen && toScreen) {
+        fromScreen.classList.remove("active");
+        toScreen.classList.add("active");
+    }
 }
 
 function openGift(type) {
-    playMusicOnce(); // Backup audio trigger
+    playMusicOnce();
     viewedGifts.add(type);
     switchScreen("gift-screen", `gift-${type}`);
     
@@ -92,11 +106,11 @@ function openGift(type) {
 
 function startTypingEffect() {
     const container = document.getElementById("typing-container");
+    if (!container) return;
     container.innerHTML = "";
     
     paragraphTexts.forEach((text, index) => {
         const p = document.createElement("p");
-        if(index === 0) p.classList.add("lyrics-style");
         p.innerHTML = text;
         p.style.animationDelay = `${index * 2.5}s`; 
         container.appendChild(p);
@@ -104,46 +118,52 @@ function startTypingEffect() {
 }
 
 function flipVaultCard(card) {
-    if(!card.querySelector('.vault-card-inner')){
-        card.innerHTML = `<div class="vault-card-inner">${card.innerHTML}</div>`;
+    if (card) {
+        card.classList.toggle("flipped");
     }
-    card.classList.toggle("flipped");
 }
 
 function showSlide(idx) {
     const slides = document.querySelectorAll(".slide");
+    if (slides.length === 0) return;
+    
     slides.forEach(s => s.classList.remove("active"));
     slides[idx].classList.add("active");
     
     viewedSlides.add(idx);
-    document.getElementById("gallery-counter").innerText = `View all photos to unlock the surprise: (${viewedSlides.size}/7)`;
+    const counter = document.getElementById("gallery-counter");
+    if (counter) {
+        counter.innerText = `View all photos to unlock the surprise: (${viewedSlides.size}/6)`;
+    }
     checkFinalUnlock();
 }
 
 function nextSlide() {
     const slides = document.querySelectorAll(".slide");
+    if (slides.length === 0) return;
     currentSlideIdx = (currentSlideIdx + 1) % slides.length;
     showSlide(currentSlideIdx);
 }
 
 function prevSlide() {
     const slides = document.querySelectorAll(".slide");
+    if (slides.length === 0) return;
     currentSlideIdx = (currentSlideIdx - 1 + slides.length) % slides.length;
     showSlide(currentSlideIdx);
 }
 
 function checkFinalUnlock() {
-    if (viewedGifts.size === 3 && viewedSlides.size === 7) {
-        document.getElementById("final-surprise-btn").style.display = "inline-block";
+    // ৩টি গিফট এবং ৬টি স্লাইড দেখা শেষ হলে বাটন আসবে
+    if (viewedGifts.size === 3 && viewedSlides.size === 6) {
+        const finalBtn = document.getElementById("final-surprise-btn");
+        if (finalBtn) finalBtn.style.display = "inline-block";
     }
 }
 
 function backToGifts() {
-    const vault = document.querySelector('.vault-card');
-    if(vault) vault.classList.remove('flipped');
-    
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-    document.getElementById("gift-screen").classList.add("active");
+    const giftScreen = document.getElementById("gift-screen");
+    if (giftScreen) giftScreen.classList.add("active");
 }
 
 function goToProposal() {
@@ -152,6 +172,7 @@ function goToProposal() {
 
 function moveNoButton() {
     const noBtn = document.getElementById("no-btn");
+    if (!noBtn) return;
     const x = Math.random() * (window.innerWidth - 150);
     const y = Math.random() * (window.innerHeight - 80);
     noBtn.style.left = `${x}px`;
@@ -159,9 +180,5 @@ function moveNoButton() {
 }
 
 function celebrate() {
-    alert("Yay! Best day ever! ❤️ I love you too!"); 
-}const paragraphTexts = [
-    `You bring a soft kind of magic to every day, and I hope today wraps you in calm moments, warm laughs, and the sweetest kind of peace.`,
-    `May this year be full of little wins, warm conversations and moments that remind just how loved you are.`,
-    `I love you ohhhuu 🐧`
-];
+    alert("Yay! Best day ever! ❤️ I love you too!");
+}
