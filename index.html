@@ -8,17 +8,14 @@
 </head>
 <body>
 
-    <!-- Background Music -->
-    <audio id="bg-music" loop>
-        <source src="https://pub-c5e31b5cdafb419a86629d1c7462ec3b.r2.dev/do-i-wanna-know-lullaby.mp3" type="audio/mpeg">
+    <audio id="bg-music" loop preload="auto" crossorigin="anonymous">
+        <source src="https://archive.org/download/20170331GoldenBrown/GoldenBrown%5B20170331%5D.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Music Status Indicator -->
     <div id="music-indicator" class="music-box" onclick="toggleMusic()">
         <span class="disc">🎵</span>
     </div>
 
-    <!-- Floating Background Hearts -->
     <div class="bg-hearts">
         <div class="heart-particle">❤️</div>
         <div class="heart-particle">💖</div>
@@ -27,7 +24,6 @@
         <div class="heart-particle">❤️</div>
     </div>
 
-    <!-- 1. Lock Screen -->
     <div id="lock-screen" class="screen active" onclick="playMusicOnce()">
         <div class="lock-container">
             <div class="left-panel">
@@ -62,7 +58,6 @@
         </div>
     </div>
 
-    <!-- 2. Wrong Passcode Screen -->
     <div id="wrong-screen" class="screen">
         <div class="wrong-container">
             <h1>WRONG PASSCODE</h1>
@@ -72,7 +67,6 @@
         </div>
     </div>
 
-    <!-- 3. Gift Menu Screen -->
     <div id="gift-screen" class="screen">
         <div class="gift-container-box">
             <h2>CHOOSE A BOX TO UNLOCK MY HEART 🎁</h2>
@@ -85,7 +79,6 @@
         </div>
     </div>
 
-    <!-- 4. Gift 1: My Feelings (With Typing Effect) -->
     <div id="gift-camera" class="screen">
         <div class="split-view">
             <div class="text-side">
@@ -102,7 +95,6 @@
         <button class="btn back-btn" onclick="backToGifts()">Back to Choices</button>
     </div>
 
-    <!-- 5. Gift 2: The Love Vault -->
     <div id="gift-cake" class="screen">
         <div class="split-view reverse">
             <div class="visual-side fade-in-left">
@@ -127,7 +119,6 @@
         <button class="btn back-btn" onclick="backToGifts()">Back to Choices</button>
     </div>
 
-    <!-- 6. Gift 3: Polaroid Memory Gallery Slider -->
     <div id="gift-gallery" class="screen">
         <div class="gallery-window">
             <h2 class="gallery-title">Moments I Cherish With You 💖</h2>
@@ -136,13 +127,13 @@
             <div class="slider-container">
                 <div class="slide active">
                     <div class="premium-polaroid">
-                        <img src="FB_IMG_17831668821594879.jpg.jpeg" alt="Your Beautiful Smile">
+                        <img src="FB_IMG_17831668821594879.jpg.jpg" alt="Your Beautiful Smile">
                         <p class="caption">Your Beautiful Smile ✨</p>
                     </div>
                 </div>
                 <div class="slide">
                     <div class="premium-polaroid">
-                        <img src="FB_IMG_17831670241742378.jpg.jpeg" alt="Vibing Together">
+                        <img src="FB_IMG_17831670241742378.jpg.jpg" alt="Vibing Together">
                         <p class="caption">Vibing Together 🎵</p>
                     </div>
                 </div>
@@ -187,14 +178,13 @@
         </div>
     </div>
 
-    <!-- 7. Final Proposal Screen -->
     <div id="final-screen" class="screen">
         <div class="split-view">
             <div class="text-side proposal-text fade-in-left">
                 <h1>From the bottom of my heart... ❤️</h1>
                 <div class="letter-scroll">
                     <p>To the one who has stolen my heart (and never returned it 🤭).</p>
-                    <p class="lyrics-style">"If you like your coffee hot, let me be your coffee pot.<br>You call the shots, babe. I just wanna be yours."</p>
+                    <p class="lyrics-style">"Golden brown, texture like sun<br>Lays me down, with my mind she runs."</p>
                     <p>No amount of time or words is ever enough when I'm with you. You make my world feel softer, safer, and completely beautiful. I love everything about us.</p>
                     <h3 class="final-ask">I really, really like you. Will you be mine? 🥰</h3>
                 </div>
