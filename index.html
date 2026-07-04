@@ -5,16 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wanna Be Yours 💖</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* ব্যাকগ্রাউন্ড হার্টস যেন বাটনের ক্লিকের সামনে বাধা না হয়ে দাঁড়ায় */
+        .bg-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* এটি অত্যন্ত জরুরি যেন ক্লিকে বাধা না দেয় */
+            z-index: 0;
+        }
+        .screen {
+            position: relative;
+            z-index: 10;
+        }
+        .keypad button {
+            cursor: pointer;
+            position: relative;
+            z-index: 20;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Background Music (O Piya - Chill/Lofi Version) -->
+    <!-- Background Music -->
     <audio id="bg-music" loop preload="auto" crossorigin="anonymous">
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Music Status Indicator -->
-    <div id="music-indicator" class="music-box" onclick="toggleMusic()">
+    <div id="music-indicator" class="music-box" onclick="toggleMusic()" style="z-index: 100;">
         <span class="disc">🎵</span>
     </div>
 
@@ -24,11 +45,10 @@
         <div class="heart-particle">💖</div>
         <div class="heart-particle">🌸</div>
         <div class="heart-particle">✨</div>
-        <div class="heart-particle">❤️</div>
     </div>
 
     <!-- 1. Lock Screen (Pic 1) -->
-    <div id="lock-screen" class="screen active" onclick="playMusicOnce()">
+    <div id="lock-screen" class="screen active">
         <div class="lock-container">
             <div class="left-panel">
                 <div class="heart-frame">
@@ -45,18 +65,18 @@
                     <span class="dot"></span>
                 </div>
                 <div class="keypad">
-                    <button onclick="pressKey(1)">1</button>
-                    <button onclick="pressKey(2)">2</button>
-                    <button onclick="pressKey(3)">3</button>
-                    <button onclick="pressKey(4)">4</button>
-                    <button onclick="pressKey(5)">5</button>
-                    <button onclick="pressKey(6)">6</button>
-                    <button onclick="pressKey(7)">7</button>
-                    <button onclick="pressKey(8)">8</button>
-                    <button onclick="pressKey(9)">9</button>
-                    <button onclick="pressKey('*')">*</button>
-                    <button onclick="pressKey(0)">0</button>
-                    <button onclick="pressKey('#')">#</button>
+                    <button type="button" onclick="pressKey('1')">1</button>
+                    <button type="button" onclick="pressKey('2')">2</button>
+                    <button type="button" onclick="pressKey('3')">3</button>
+                    <button type="button" onclick="pressKey('4')">4</button>
+                    <button type="button" onclick="pressKey('5')">5</button>
+                    <button type="button" onclick="pressKey('6')">6</button>
+                    <button type="button" onclick="pressKey('7')">7</button>
+                    <button type="button" onclick="pressKey('8')">8</button>
+                    <button type="button" onclick="pressKey('9')">9</button>
+                    <button type="button" onclick="pressKey('*')">*</button>
+                    <button type="button" onclick="pressKey('0')">0</button>
+                    <button type="button" onclick="pressKey('#')">#</button>
                 </div>
             </div>
         </div>
