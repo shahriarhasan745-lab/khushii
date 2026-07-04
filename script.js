@@ -159,5 +159,9 @@ function moveNoButton() {
 }
 
 function celebrate() {
-    alert("Yay! Best day ever! ❤️ I love you too!");
-}
+    alert("Yay! Best day ever! ❤️ I love you too!"); 
+}const paragraphTexts = [
+    `You bring a soft kind of magic to every day, and I hope today wraps you in calm moments, warm laughs, and the sweetest kind of peace.`,
+    `May this year be full of little wins, warm conversations and moments that remind just how loved you are.`,
+    `I love you ohhhuu 🐧`
+];
