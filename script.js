@@ -1,5 +1,5 @@
 let currentPasscode = "";
-const correctPasscode = "2026"; // তোমার ৪ ডিজিটের কোড
+const correctPasscode = "2026"; // এটিই তোমার কোড
 let musicStarted = false;
 let currentSlideIdx = 0;
 
@@ -12,7 +12,6 @@ const paragraphTexts = [
     "I love you ohhhuu 🐧"
 ];
 
-// এই ফাংশনটি যেকোনো বাটনে প্রথম ক্লিকেই গান স্টার্ট করবে
 function playMusicOnce() {
     if (!musicStarted) {
         const audio = document.getElementById("bg-music");
@@ -22,9 +21,7 @@ function playMusicOnce() {
                 musicStarted = true;
                 const indicator = document.getElementById("music-indicator");
                 if (indicator) indicator.classList.add("playing");
-            }).catch(err => {
-                console.log("Autoplay waiting for solid interaction...");
-            });
+            }).catch(err => console.log("Music interaction waiting..."));
         }
     }
 }
@@ -44,8 +41,9 @@ function toggleMusic() {
 }
 
 function pressKey(num) {
-    // যেকোনো নম্বর টিপলেই গান প্লে করার চেষ্টা করবে
-    playMusicOnce(); 
+    // মিউজিক ট্রিগার এবং নম্বর ইনপুট লগ
+    playMusicOnce();
+    console.log("Pressed key:", num); 
     
     if (currentPasscode.length < 4) {
         currentPasscode += num;
@@ -118,9 +116,7 @@ function startTypingEffect() {
 }
 
 function flipVaultCard(card) {
-    if (card) {
-        card.classList.toggle("flipped");
-    }
+    if (card) card.classList.toggle("flipped");
 }
 
 function showSlide(idx) {
@@ -153,7 +149,6 @@ function prevSlide() {
 }
 
 function checkFinalUnlock() {
-    // ৩টি গিফট এবং ৬টি স্লাইড দেখা শেষ হলে বাটন আসবে
     if (viewedGifts.size === 3 && viewedSlides.size === 6) {
         const finalBtn = document.getElementById("final-surprise-btn");
         if (finalBtn) finalBtn.style.display = "inline-block";
